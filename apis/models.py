@@ -13,6 +13,9 @@ class School(models.Model):
     name = models.CharField(max_length=255)
     short_name = models.CharField(max_length=10)
     address = models.TextField()
+    
+    class Meta:
+        db_table = "schools"
 
 
 class ClassRoom(models.Model):
@@ -26,12 +29,7 @@ class ClassRoom(models.Model):
     )
 
     class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["school", "year_level", "room"],
-                name="unique_classroom_per_school"
-            )
-        ]
+        db_table = "class_rooms"
 
 
 class Student(models.Model):
@@ -49,6 +47,9 @@ class Student(models.Model):
         on_delete=models.CASCADE,
         related_name="students"
     )
+    
+    class Meta:
+        db_table = "students"
 
 
 class Teacher(models.Model):
@@ -65,3 +66,6 @@ class Teacher(models.Model):
         ClassRoom,
         related_name="teachers"
     )
+    
+    class Meta:
+            db_table = "teachers"
