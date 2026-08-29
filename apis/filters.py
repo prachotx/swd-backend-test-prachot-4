@@ -1,4 +1,10 @@
-from django_filters import FilterSet, filters
+from django_filters import FilterSet
 
+from apis.models import ClassRoom
 
-# code here
+class ClassRoomFilter(FilterSet):
+    class Meta:
+        model = ClassRoom
+        fields = [
+            'school',
+        ]
