@@ -4,6 +4,16 @@ from .models import ClassRoom
 from .models import Student
 from .models import Teacher
 
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = "__all__"
+
+class TeacherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = "__all__"
+
 class SchoolListSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
@@ -35,17 +45,22 @@ class SchoolDetailSerializer(serializers.ModelSerializer):
             "teacher_count",
         ]
         
-class ClassRoomSerializer(serializers.ModelSerializer):
+class ClassRoomListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassRoom
         fields = "__all__"
 
-class StudentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Student
-        fields = "__all__"
+class ClassRoomDetailSerializer(serializers.ModelSerializer):
+    teachers = TeacherSerializer(many=True, read_only=True)
+    students = StudentSerializer(many=True, read_only=True)
 
-class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Teacher
-        fields = "__all__"
+        model = ClassRoom
+        fields = [
+            "id", 
+            "school",
+            "year_level", 
+            "room", 
+            "teachers", 
+            "students"
+        ]
