@@ -3,32 +3,6 @@ from rest_framework import serializers
 from .models import ClassRoom, School, Student, Teacher
 
 
-class StudentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Student
-        fields = "__all__"
-
-
-class ClassRoomMiniSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ClassRoom
-        fields = ["id", "year_level", "room"]
-
-
-class TeacherListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Teacher
-        fields = ["id", "first_name", "last_name", "gender"]
-
-
-class TeacherDetailSerializer(serializers.ModelSerializer):
-    class_rooms = ClassRoomMiniSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Teacher
-        fields = ["id", "first_name", "last_name", "gender", "class_rooms"]
-
-
 class SchoolListSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
@@ -59,9 +33,27 @@ class ClassRoomListSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ClassRoomMiniSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClassRoom
+        fields = ["id", "year_level", "room"]
+
+
+class StudentListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ["id", "first_name", "last_name", "gender", "class_room"]
+
+
+class TeacherListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = ["id", "first_name", "last_name", "gender"]
+
+
 class ClassRoomDetailSerializer(serializers.ModelSerializer):
     teachers = TeacherListSerializer(many=True, read_only=True)
-    students = StudentSerializer(many=True, read_only=True)
+    students = StudentListSerializer(many=True, read_only=True)
 
     class Meta:
         model = ClassRoom
@@ -73,3 +65,19 @@ class ClassRoomDetailSerializer(serializers.ModelSerializer):
             "teachers",
             "students",
         ]
+
+
+class StudentDetailSerializer(serializers.ModelSerializer):
+    class_room = ClassRoomMiniSerializer(read_only=True)
+
+    class Meta:
+        model = Student
+        fields = ["id", "first_name", "last_name", "gender", "class_room"]
+
+
+class TeacherDetailSerializer(serializers.ModelSerializer):
+    class_rooms = ClassRoomMiniSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Teacher
+        fields = ["id", "first_name", "last_name", "gender", "class_rooms"]
