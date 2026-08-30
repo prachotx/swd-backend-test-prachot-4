@@ -7,11 +7,11 @@ from apis.serializers import TeacherDetailSerializer, TeacherListSerializer
 
 
 class TeacherViewSet(viewsets.ModelViewSet):
-    queryset = Teacher.objects.all().prefetch_related('classrooms')
+    queryset = Teacher.objects.all().prefetch_related("classrooms")
     filter_backends = [DjangoFilterBackend]
     filterset_class = TeacherFilter
 
     def get_serializer_class(self):
-        if self.action == 'retrieve':
+        if self.action == "retrieve":
             return TeacherDetailSerializer
         return TeacherListSerializer
