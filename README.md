@@ -30,7 +30,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-## 5. Create Superuser (ถ้าต้องการใช้งาน admin)
+## 5. Create Superuser
 
 ```bash
 python manage.py createsuperuser
