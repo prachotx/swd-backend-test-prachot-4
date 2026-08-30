@@ -7,7 +7,7 @@ from apis.serializers import TeacherDetailSerializer, TeacherListSerializer
 
 
 class TeacherViewSet(viewsets.ModelViewSet):
-    queryset = Teacher.objects.all().prefetch_related('class_rooms')
+    queryset = Teacher.objects.all().prefetch_related('classrooms')
     filter_backends = [DjangoFilterBackend]
     filterset_class = TeacherFilter
 

@@ -12,8 +12,8 @@ class ClassRoomFilter(FilterSet):
 
 
 class TeacherFilter(FilterSet):
-    school = NumberFilter(field_name="class_rooms__school", lookup_expr="exact")
-    classroom = NumberFilter(field_name="class_rooms", lookup_expr="exact")
+    school = NumberFilter(field_name="classrooms__school", lookup_expr="exact")
+    classroom = NumberFilter(field_name="classrooms", lookup_expr="exact")
     first_name = CharFilter(field_name="first_name", lookup_expr="icontains")
     last_name = CharFilter(field_name="last_name", lookup_expr="icontains")
     gender = CharFilter(field_name="gender", lookup_expr="exact")
@@ -24,8 +24,8 @@ class TeacherFilter(FilterSet):
 
 
 class StudentFilter(FilterSet):
-    school = NumberFilter(field_name="class_room__school", lookup_expr="exact")
-    classroom = NumberFilter(field_name="class_room", lookup_expr="exact")
+    school = NumberFilter(field_name="classroom__school", lookup_expr="exact")
+    classroom = NumberFilter(field_name="classroom", lookup_expr="exact")
     first_name = CharFilter(field_name="first_name", lookup_expr="icontains")
     last_name = CharFilter(field_name="last_name", lookup_expr="icontains")
     gender = CharFilter(field_name="gender", lookup_expr="exact")

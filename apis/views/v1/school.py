@@ -16,9 +16,9 @@ class SchoolViewSet(viewsets.ModelViewSet):
 
         if self.action == "retrieve":
             queryset = queryset.annotate(
-                classroom_count=Count("class_rooms", distinct=True),
-                student_count=Count("class_rooms__students", distinct=True),
-                teacher_count=Count("class_rooms__teachers", distinct=True),
+                classroom_count=Count("classrooms", distinct=True),
+                student_count=Count("classrooms__students", distinct=True),
+                teacher_count=Count("classrooms__teachers", distinct=True),
             )
 
         return queryset

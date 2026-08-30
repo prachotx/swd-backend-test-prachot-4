@@ -6,7 +6,7 @@ from .models import ClassRoom, School, Student, Teacher
 class SchoolListSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
-        fields = "__all__"
+        fields = ["id", "name", "short_name", "address"]
 
 
 class SchoolDetailSerializer(serializers.ModelSerializer):
@@ -30,7 +30,7 @@ class SchoolDetailSerializer(serializers.ModelSerializer):
 class ClassRoomListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassRoom
-        fields = "__all__"
+        fields = ["id", "school", "year_level", "room"]
 
 
 class ClassRoomMiniSerializer(serializers.ModelSerializer):
@@ -42,7 +42,7 @@ class ClassRoomMiniSerializer(serializers.ModelSerializer):
 class StudentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ["id", "first_name", "last_name", "gender", "class_room"]
+        fields = ["id", "first_name", "last_name", "gender", "classroom"]
 
 
 class TeacherListSerializer(serializers.ModelSerializer):
@@ -68,16 +68,16 @@ class ClassRoomDetailSerializer(serializers.ModelSerializer):
 
 
 class StudentDetailSerializer(serializers.ModelSerializer):
-    class_room = ClassRoomMiniSerializer(read_only=True)
+    classroom = ClassRoomMiniSerializer(read_only=True)
 
     class Meta:
         model = Student
-        fields = ["id", "first_name", "last_name", "gender", "class_room"]
+        fields = ["id", "first_name", "last_name", "gender", "classroom"]
 
 
 class TeacherDetailSerializer(serializers.ModelSerializer):
-    class_rooms = ClassRoomMiniSerializer(many=True, read_only=True)
+    classrooms = ClassRoomMiniSerializer(many=True, read_only=True)
 
     class Meta:
         model = Teacher
-        fields = ["id", "first_name", "last_name", "gender", "class_rooms"]
+        fields = ["id", "first_name", "last_name", "gender", "classrooms"]

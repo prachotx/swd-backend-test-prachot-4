@@ -7,7 +7,7 @@ from apis.serializers import StudentDetailSerializer, StudentListSerializer
 
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all().select_related('class_room')
+    queryset = Student.objects.all().select_related('classroom')
     filter_backends = [DjangoFilterBackend]
     filterset_class = StudentFilter
 
